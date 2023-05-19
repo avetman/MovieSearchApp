@@ -1,7 +1,6 @@
 import {
     View,
     Text,
-    Image,
     StyleSheet,
     ImageBackground,
     SafeAreaView,
@@ -11,7 +10,7 @@ import {
     Dimensions,
     TouchableOpacity,
 } from "react-native";
-import React, {useMemo, useRef, useEffect, useState, Suspense, lazy} from "react";
+import React, {useMemo, useRef, useEffect, useState, Suspense, lazy, useCallback} from "react";
 import { MaterialIcons } from '@expo/vector-icons';
 //import ActorsList from "../parts/ActorsList";
 const LazyActorsList = lazy(() => import('../parts/ActorsList'));
@@ -33,6 +32,8 @@ import BackgroundVideo from "../parts/BackgroundVideo";
 const numColumns = Math.floor(screenWidth / itemWidth);
 import {useAppTheme} from "../../hooks/useAppTheme";
 import {imageUri} from "../../utils";
+import {Image} from 'expo-image';
+import ListItem from "../ui/HorizontalList/ListItem";
 const TrendingDetails = () => {
     const theme = useAppTheme();
     const navigationState = useNavigationState((state) => state);
@@ -108,7 +109,9 @@ const TrendingDetails = () => {
     const handleClick = () => {
         setShowTrailer(prev => !prev)
     };
-
+    const renderItem = useCallback(({item}) => (
+        <LazyActorsList actor={item} />
+    ), []);
 
 
     const handleScroll = (event: any) => {
@@ -119,9 +122,6 @@ const TrendingDetails = () => {
             //setShowTrailer(prev => !prev)
         }
     };
-
-
-
 
 
     return(
@@ -140,10 +140,11 @@ const TrendingDetails = () => {
                                     }
 
                                     {!showTrailer && (
-                                        <ImageBackground  blurRadius={1} style={styles.backdrop} source={{ uri: `${imageUri.low}${Movie?.backdrop_path}` }} />
+
+                                         <ImageBackground  blurRadius={1} style={styles.backdrop} source={{ uri: `${imageUri.low}${Movie?.backdrop_path}` }} />
                                     )}
                                     {!showTrailer === true && (
-                                        <Image style={styles.poster} source={{ uri: `${imageUri.norm}${Movie?.poster_path}` }} />
+                                        <Image style={styles.poster} source={{ uri: `${imageUri.norm}${Movie?.poster_path}` }} contentFit='cover' placeholder={require('../../assets/img/fallback.png')} transition={1000}/>
                                      )}
 
                                     <TouchableOpacity style={styles.back} onPress={() => navigation.goBack()}>
@@ -158,7 +159,6 @@ const TrendingDetails = () => {
                                         </Text>
                                     </TouchableOpacity>
                                 </View>
-
 
 
                                 <View style={[styles.textContainer, theme.container]}>
@@ -209,7 +209,8 @@ const TrendingDetails = () => {
                                 <Suspense fallback={<ActivityIndicator />}>
                                     <FlatList
                                         data={Actors?.cast}
-                                        renderItem={({ item }) => <LazyActorsList actor={item} />}
+                                        renderItem={renderItem}
+                                       // renderItem={({ item }) => <LazyActorsList actor={item} />}
                                         keyExtractor={(item) => item.id.toString()}
                                         numColumns={numColumns}
                                     />

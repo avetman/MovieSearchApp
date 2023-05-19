@@ -1,4 +1,5 @@
 import {View, Text, StyleSheet, ImageBackground } from 'react-native';
+import {memo} from 'react';
 import {Fontisto} from "@expo/vector-icons";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import {formatDateString} from "../../../utils";
@@ -88,4 +89,4 @@ const styles = StyleSheet.create({
     }
 
 })
-export default ListItem;
+export default memo(ListItem);

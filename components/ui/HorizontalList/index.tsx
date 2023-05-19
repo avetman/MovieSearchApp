@@ -1,14 +1,20 @@
 import {View, Text, FlatList, ScrollView, StyleSheet, ActivityIndicator} from 'react-native';
 import ListItem from "./ListItem";
+import {useCallback} from "react";
 
 const HorizontalList = ({data, onMovieClick }) => {
 
+    const renderItem = useCallback(({item}) => (
+        <ListItem movie={item}  onMovieClick={onMovieClick} />
+    ), []);
 
     return (
         <View style={styles.List}>
             <FlatList
                 data={data?.results}
-                renderItem={({item}) => <ListItem movie={item}  onMovieClick={onMovieClick} />}
+                renderItem={renderItem}
+                removeClippedSubviews={true}
+                //renderItem={({item}) => <ListItem movie={item}  onMovieClick={onMovieClick} />}
                 keyExtractor={item => item.id.toString()}
                 horizontal={true}
                 nestedScrollEnabled

@@ -1,11 +1,12 @@
 import {View, Text, StyleSheet, SafeAreaView, ScrollView, FlatList} from "react-native";
 import SearchPart from "../parts/SearchPart";
 import {useSearchMoviesQuery} from "../../store/api/rtkQueryApi";
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 import MovieGrid from "../parts/MovieGrid";
 import {debounce} from "../../utils";
 import {useAppTheme} from "../../hooks/useAppTheme";
 import Container from "../Container";
+import ListItem from "../ui/PopularPeople/ListItem";
 const SearchScreen = () => {
     const theme = useAppTheme();
     const [searchQuery, setSearchQuery] = useState('');
@@ -21,6 +22,9 @@ const SearchScreen = () => {
     const handleDebouncedSearchQueryChange = (query) => {
         debouncedSearch(query);
     };
+    const renderItem = useCallback(({item}) => (
+        <MovieGrid movie={item}/>
+    ), []);
     console.log('searchQuery', searchQuery)
     return(
         <Container>
@@ -34,9 +38,10 @@ const SearchScreen = () => {
                             data={searchResults?.results}
                             keyExtractor={(item) => item.id.toString()}
                             numColumns={2}
-                            renderItem={({ item }) => (
-                                <MovieGrid movie={item}/>
-                            )}
+                            renderItem={renderItem}
+                            // renderItem={({ item }) => (
+                            //     <MovieGrid movie={item}/>
+                            // )}
                         />
                     </View>
                 </ScrollView>

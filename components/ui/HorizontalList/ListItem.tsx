@@ -1,5 +1,6 @@
 import {View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
-import React from 'react';
+import {Image} from "expo-image";
+import {memo, useCallback} from 'react';
 import {Fontisto} from "@expo/vector-icons";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import {formatDateString} from "../../../utils";
@@ -21,15 +22,16 @@ const ListItem =({ movie, onMovieClick }) => {
     const navigation = useNavigation();
 
     const handleOnPress = (movieId) => {
-        navigation.navigate('TrendingDetails', {movieId, name: movie?.original_title})
+        navigation.push('TrendingDetails', {movieId, name: movie?.original_title})
     }
-
+    const memoizedPress = useCallback((movieId) => handleOnPress(movieId),[])
 
     return(
 
         <TouchableOpacity onPress={() => onMovieClick  ? onMovieClick(movie.id, movie?.original_title) : handleOnPress(movie.id) }>
             <View style={[styles.ListItem ]}>
                 <View style={styles.imageContainer}>
+                    {/*<Image style={styles.backdrop} source={{ uri: `${imageUri.norm}${movie?.poster_path}` }} placeholder={require('../../../assets/img/fallback.png')}/>*/}
                     <ImageBackground
                         style={styles.backdrop}
                         source={{uri: `${imageUri.norm}${movie.poster_path}`}}
@@ -124,4 +126,4 @@ const styles = StyleSheet.create({
     }
 
 })
-export default ListItem;
+export default memo(ListItem);

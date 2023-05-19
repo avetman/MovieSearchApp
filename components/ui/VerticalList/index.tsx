@@ -1,6 +1,7 @@
 import {View, Text, FlatList, ScrollView, StyleSheet, ActivityIndicator, SafeAreaView} from 'react-native';
 import ListItem from "./ListItem";
 import {useAppTheme} from "../../../hooks/useAppTheme";
+import {useCallback} from "react";
 
 
 
@@ -10,6 +11,9 @@ const theme = useAppTheme()
     const Separator = () => {
         return <View style={[{ height: 5, backgroundColor: '#eee' }, theme.container]} />;
     };
+    const renderItem = useCallback(({item}) => (
+        <ListItem movie={item} />
+    ), []);
 
     return (
         <View style={[styles.List, theme.block]}>
@@ -17,7 +21,8 @@ const theme = useAppTheme()
             <FlatList
                 ItemSeparatorComponent={Separator}
                 data={results}
-                renderItem={({item}) => <ListItem movie={item} />}
+                renderItem={renderItem}
+               // renderItem={({item}) => <ListItem movie={item} />}
                 keyExtractor={item => item.id.toString()}
                 horizontal={false}
                 nestedScrollEnabled

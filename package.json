@@ -7,19 +7,22 @@
     "@reduxjs/toolkit": "^1.9.5",
     "@types/react-redux": "^7.1.25",
     "expo": "^48.0.7",
+    "expo-dev-client": "~2.2.1",
     "npm": "^9.6.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.71.8",
     "react-native-config": "^1.5.1",
     "react-native-dotenv": "^3.4.8",
+    "react-native-fast-image": "^8.6.3",
     "react-native-safe-area-context": "4.5.0",
     "react-native-screens": "~3.20.0",
     "react-native-web": "~0.18.7",
     "react-native-webview": "11.26.0",
     "react-redux": "^8.0.5",
     "run": "^1.4.0",
-    "start": "^5.1.0"
+    "start": "^5.1.0",
+    "expo-image": "~1.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",

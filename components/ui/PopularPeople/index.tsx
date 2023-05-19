@@ -1,15 +1,19 @@
 import {View, Text, FlatList, ScrollView, StyleSheet, ActivityIndicator} from 'react-native';
 import ListItem from "./ListItem";
+import {useCallback} from "react";
 
 
 const PopularPeopleSection = ({data }) => {
-
+    const renderItem = useCallback(({item}) => (
+        <ListItem movie={item} />
+    ), []);
     return (
         <View style={styles.List}>
 
             <FlatList
                 data={data?.results}
-                renderItem={({item}) => <ListItem movie={item} />}
+                renderItem={renderItem}
+                //renderItem={({item}) => <ListItem movie={item} />}
                 keyExtractor={item => item.id.toString()}
                 horizontal={true}
             />

@@ -1,4 +1,5 @@
-import {View, Text, StyleSheet, SafeAreaView, ScrollView, Image, FlatList} from "react-native";
+import {View, Text, StyleSheet, SafeAreaView, ScrollView, FlatList} from "react-native";
+import {Image} from 'expo-image';
 import {useRoute, useNavigation} from "@react-navigation/native";
 import {useAppTheme} from "../../hooks/useAppTheme";
 import {useGetActorInfoQuery, useGetActorMoviesQuery} from "../../store/api/rtkQueryApi";
@@ -7,7 +8,7 @@ import HorizontalList from "../ui/HorizontalList";
 import  {useMemo} from "react";
 import ListItem from "../ui/HorizontalList/ListItem";
 import {imageUri} from "../../utils";
-
+import SuperFastImage from "../ui/SuperFastImage";
 
 const ActorInfoPage = () => {
     const theme = useAppTheme();
@@ -57,7 +58,8 @@ const ActorInfoPage = () => {
             <ScrollView>
                 <View>
                    <View style={[styles.imagePart, theme.card]}>
-                       <Image style={styles.pic} source={{ uri: `${imageUri.norm}${actorsData?.profile_path}` }} />
+                       {/*<SuperFastImage style={styles.pic} uri={actorsData?.profile_path}  />*/}
+                      <Image style={styles.pic} source={{ uri: `${imageUri.norm}${actorsData?.profile_path}` }}  contentFit="contain" placeholder={require('../../assets/img/fallback.png')} transition={1000} />
                        <View style={styles.textContainer}>
                            <Text style={[theme.themeText, styles.name]}>{actorsData?.name}</Text>
                            <Text style={[theme.themeText]}>{actorsData?.known_for_department}</Text>
@@ -128,7 +130,7 @@ const styles = StyleSheet.create({
         borderRadius: 12,
     },
     pic: {
-        aspectRatio: 2/2.5,
+        aspectRatio: 2 / 2.5,
         flex: 1,
         borderRadius:8,
         resizeMode: 'cover',
