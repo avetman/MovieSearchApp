@@ -1,5 +1,6 @@
 # 🎥 Movie App
 
+![photo_2023-05-21_13-02-54.jpg](assets%2Fimg%2Fphoto_2023-05-21_13-02-54.jpg)
 ## 📱 Introduction
 The Movie App is a mobile application built using React Native and Expo. It allows users to explore and discover information about movies, including details, ratings, cast, and recommendations.
 

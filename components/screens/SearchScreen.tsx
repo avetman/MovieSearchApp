@@ -29,21 +29,18 @@ const SearchScreen = () => {
     return(
         <Container>
             <SafeAreaView style={theme.container}>
-                <ScrollView >
-                    <View style={[styles.container]}>
-                        <SearchPart handleSearchQuery={handleDebouncedSearchQueryChange} searchQuery={searchQuery}/>
-                    </View>
-                    <View>
-                        <FlatList
-                            data={searchResults?.results}
-                            keyExtractor={(item) => item.id.toString()}
-                            numColumns={2}
-                            renderItem={renderItem}
-                            // renderItem={({ item }) => (
-                            //     <MovieGrid movie={item}/>
-                            // )}
-                        />
-                    </View>
+                <ScrollView>
+                        <View style={[styles.container]}>
+                            <SearchPart handleSearchQuery={handleDebouncedSearchQueryChange} searchQuery={searchQuery}/>
+                        </View>
+                        <View>
+                            <FlatList
+                                data={searchResults?.results}
+                                keyExtractor={(item) => item.id.toString()}
+                                numColumns={2}
+                                renderItem={renderItem}
+                            />
+                        </View>
                 </ScrollView>
             </SafeAreaView>
         </Container>

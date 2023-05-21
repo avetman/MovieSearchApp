@@ -24,7 +24,7 @@ const HomeScreen = () => {
 
     return(
         <SafeAreaView style={[styles.container, themeStyles.container]}>
-            <ScrollView contentContainerStyle={styles.scrollContent} scrollEnabled={false}>
+            <ScrollView contentContainerStyle={styles.scrollContent}>
 
                 <View style={[styles.popular, themeStyles.block, styles.card]}>
                     <Text style={[styles.text,themeStyles.themeText]}> Trending </Text>

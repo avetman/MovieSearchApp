@@ -9,7 +9,6 @@ const PopularPeopleSection = ({data }) => {
     ), []);
     return (
         <View style={styles.List}>
-
             <FlatList
                 data={data?.results}
                 renderItem={renderItem}
@@ -17,7 +16,6 @@ const PopularPeopleSection = ({data }) => {
                 keyExtractor={item => item.id.toString()}
                 horizontal={true}
             />
-
         </View>
 
     );

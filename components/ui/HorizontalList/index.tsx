@@ -23,19 +23,6 @@ const HorizontalList = ({data, onMovieClick }) => {
             />
         </View>
 
-        // <ScrollView
-        //     horizontal
-        //     pagingEnabled
-        //     style={styles.List}
-        // >
-        //     {
-        //         data.results?.map((movie) => (
-        //             <ListItem movie={movie} key={movie.id} />
-        //         ))
-        //     }
-        //
-        // </ScrollView>
-
     );
 }
 

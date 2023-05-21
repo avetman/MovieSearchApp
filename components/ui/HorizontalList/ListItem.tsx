@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
+import {View, Text, StyleSheet, ImageBackground, TouchableOpacity, Pressable } from 'react-native';
 import {Image} from "expo-image";
 import {memo, useCallback} from 'react';
 import {Fontisto} from "@expo/vector-icons";
@@ -28,18 +28,18 @@ const ListItem =({ movie, onMovieClick }) => {
 
     return(
 
-        <TouchableOpacity onPress={() => onMovieClick  ? onMovieClick(movie.id, movie?.original_title) : handleOnPress(movie.id) }>
+        <Pressable onPress={() => onMovieClick  ? onMovieClick(movie.id, movie?.original_title) : handleOnPress(movie.id) }>
             <View style={[styles.ListItem ]}>
                 <View style={styles.imageContainer}>
                     {/*<Image style={styles.backdrop} source={{ uri: `${imageUri.norm}${movie?.poster_path}` }} placeholder={require('../../../assets/img/fallback.png')}/>*/}
                     <ImageBackground
                         style={styles.backdrop}
                         source={{uri: `${imageUri.norm}${movie.poster_path}`}}
-                    />
+                    >
                     <View style={[styles.rating, {backgroundColor: ratingList(movie?.vote_average)} ]}>
                         <Text>{movie.vote_average}</Text>
                     </View>
-
+                    </ImageBackground>
                 </View>
 
                 <View style={styles.textContainer}>
@@ -48,7 +48,7 @@ const ListItem =({ movie, onMovieClick }) => {
                 </View>
             </View>
 
-        </TouchableOpacity>
+        </Pressable>
             // <TouchableOpacity onPress={() => handleOnPress(movie.id)}>
             //     <View style={[styles.ListItem, styles.shadowProp ]}>
             //         <View style={styles.imageContainer}>
@@ -116,13 +116,14 @@ const styles = StyleSheet.create({
         shadowRadius: 3,
     },
     rating: {
-        backgroundColor: "rgba(256,250,250,.4)",
+
+       backgroundColor: "rgba(256,250,250,.4)",
        borderRadius: 4,
        paddingLeft: 10,
        paddingRight: 10,
-        position: 'absolute',
-        left: -5,
-        top: "10%",
+    position: 'absolute',
+    left: -5,
+    top: "10%",
     }
 
 })

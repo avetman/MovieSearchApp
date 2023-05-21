@@ -3,7 +3,8 @@ import {useState, useEffect} from "react";
 import { MaterialIcons } from '@expo/vector-icons';
 import {useAppTheme} from "../../hooks/useAppTheme";
 const SearchPart = ({handleSearchQuery, searchQuery}) => {
-    const [text, onChangeText] = useState('');
+    const [text, onChangeText] = useState({});
+
     const theme = useAppTheme();
     const handleSeach = (e) => {
         onChangeText(e.value)
@@ -12,7 +13,7 @@ const SearchPart = ({handleSearchQuery, searchQuery}) => {
     return(
         <View style={[styles.container, theme.container]}>
             <TextInput
-                style={styles.input}
+                style={[styles.input]}
                 onChangeText={handleSearchQuery}
             />
             <MaterialIcons style={styles.searchIcon} name="search" size={24} color="#fff" />
